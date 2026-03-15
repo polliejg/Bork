@@ -1,18 +1,21 @@
 # Bork 🐾
 
-Voice-to-text for developers. Hold a hotkey, speak, release — your words appear wherever your cursor is. Pair it with an AI model to rewrite your dictation into clean, structured prompts before they land.
+Voice-to-text for developers. Hold a hotkey, speak, release — your words appear wherever your cursor is. Works standalone or paired with an AI model to clean up your dictation before it lands.
 
 ---
 
-## How it works
+## Usage
 
-| Hotkey | What happens |
-|---|---|
-| Hold `Right Ctrl` | Records your voice, transcribes on release, pastes instantly |
-| Hold `Right Alt` + `Right Ctrl` | Same, but runs the transcript through an AI rewriter first |
-| Highlight code/text → `Right Alt` + `Right Ctrl` | AI answers your voice question about the selected text |
+### Basic transcription
+Hold `Right Ctrl`, speak, release. Text is pasted instantly into whatever you were typing in.
 
-All hotkeys are configurable.
+### AI-enhanced transcription
+Hold `Right Alt` + `Right Ctrl`, speak, release. Your dictation is rewritten by an AI before pasting — great for turning rough spoken thoughts into clean, structured prompts.
+
+### Ask a question about highlighted text
+Highlight any text on screen, then hold `Right Ctrl`, ask your question out loud, release. The AI reads the highlighted text and answers your question in a floating popup. No Alt needed — just highlight and record.
+
+All hotkeys are configurable in the **Settings** tab.
 
 ---
 
@@ -32,21 +35,34 @@ copy config.example.yaml config.yaml
 python main.py
 ```
 
-On first run without a `config.yaml`, Bork creates one automatically with defaults.
+A `config.yaml` is created automatically on first run if one doesn't exist.
 
 ---
 
-## AI Enhancement
+## AI providers
 
-Works with **Ollama** (local, no key needed), **OpenAI**, **Anthropic/Claude**, **Google Gemini**, **Groq**, or any OpenAI-compatible endpoint. Configure the provider and API key in the **AI Settings** tab.
+Configure your provider and API key in the **AI Settings** tab. Supported:
 
-The default prompt rewrites your dictation into a clean coding prompt. You can customise it or pick from presets (Coding AI, Concise, Formal).
+| Provider | Key required | Notes |
+|---|---|---|
+| **Ollama** | No | Local models, runs fully offline |
+| **OpenAI** | Yes | GPT-4o, etc. |
+| **Anthropic** | Yes | Claude models |
+| **Google Gemini** | Yes | Gemini 2.0 Flash, 2.5 Pro, etc. |
+| **Groq** | Yes | Fast inference, free tier available |
+| **Custom** | Optional | Any OpenAI-compatible endpoint |
 
 ---
 
 ## Whisper models
 
-Models download automatically on first use via HuggingFace. `base` is the default (145 MB, fast). Change it in Settings — options range from `tiny` to `large-v3`.
+Models download automatically on first use. `base` is the default (145 MB, good for most uses). Change the model in **Settings** — options range from `tiny` to `large-v3`.
+
+---
+
+## Workflows
+
+Map voice phrases to keyboard shortcuts or shell commands. Bork fuzzy-matches what you said and fires the action. Manage them in the **Workflows** tab or edit `workflows/definitions.yaml` directly.
 
 ---
 
@@ -57,6 +73,8 @@ pip install pyinstaller
 pyinstaller bork.spec
 # output: dist/bork/bork.exe
 ```
+
+Or download a pre-built release from the [Releases](https://github.com/polliejg/Bork/releases) page.
 
 ---
 
