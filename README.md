@@ -38,7 +38,7 @@ On first run without a `config.yaml`, Bork creates one automatically with defaul
 
 ## AI Enhancement
 
-Works with **Ollama** (local, no key needed), **OpenAI**, **Anthropic/Claude**, **Groq**, or any OpenAI-compatible endpoint. Configure the provider and API key in the **AI Settings** tab.
+Works with **Ollama** (local, no key needed), **OpenAI**, **Anthropic/Claude**, **Google Gemini**, **Groq**, or any OpenAI-compatible endpoint. Configure the provider and API key in the **AI Settings** tab.
 
 The default prompt rewrites your dictation into a clean coding prompt. You can customise it or pick from presets (Coding AI, Concise, Formal).
 

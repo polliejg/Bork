@@ -43,6 +43,7 @@ _DEFAULT_CONFIG = {
             "openai":    {"api_url": "https://api.openai.com/v1",  "api_key": ""},
             "anthropic": {"api_url": "https://api.anthropic.com",  "api_key": ""},
             "groq":      {"api_url": "https://api.groq.com/openai/v1", "api_key": ""},
+            "google":    {"api_url": "https://generativelanguage.googleapis.com/v1beta/openai", "api_key": ""},
             "custom":    {"api_url": "", "api_key": ""},
         },
     },

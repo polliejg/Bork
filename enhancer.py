@@ -54,6 +54,21 @@ PROVIDERS: dict[str, ProviderDef] = {
         model_source="openai_list",
         url_editable=False,
     ),
+    "google": ProviderDef(
+        label="Google Gemini",
+        default_url="https://generativelanguage.googleapis.com/v1beta/openai",
+        requires_key=True,
+        protocol="openai",
+        model_source="static",
+        static_models=[
+            "gemini-2.5-pro-preview-05-06",
+            "gemini-2.0-flash",
+            "gemini-2.0-flash-lite",
+            "gemini-1.5-pro",
+            "gemini-1.5-flash",
+        ],
+        url_editable=False,
+    ),
     "custom": ProviderDef(
         label="Custom endpoint",
         default_url="",

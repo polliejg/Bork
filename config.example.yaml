@@ -44,6 +44,9 @@ ai_enhancement:
     groq:
       api_url: https://api.groq.com/openai/v1
       api_key: ""          # gsk_...
+    google:
+      api_url: https://generativelanguage.googleapis.com/v1beta/openai
+      api_key: ""          # AIza...
     custom:
       api_url: ""          # Any OpenAI-compatible endpoint
       api_key: ""
