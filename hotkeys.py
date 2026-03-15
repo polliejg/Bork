@@ -168,11 +168,8 @@ class HotkeyManager:
         # ── Context mode: highlighted text + voice question → AI answer ───────
         if context_text:
             cfg = self.enhance_cfg
-            # Only the question goes as the user message.
-            # The highlighted text is embedded in the system prompt so the
-            # model treats it as background context, not something to echo back.
             messages = [{"role": "user", "content": question}]
-            result   = question   # fallback
+            result   = ""
 
             if not self.enhancer.connected:
                 print("[hotkeys] context mode — enhancer not connected", flush=True)
@@ -183,11 +180,13 @@ class HotkeyManager:
                 if model:
                     self.state.set_status(Status.ENHANCING)
                     try:
-                        base_prompt = cfg.get("context_system_prompt", CONTEXT_SYSTEM_PROMPT)
-                        ctx_prompt = (
-                            f"{base_prompt}\n\n"
-                            f"The user has highlighted this text:\n\n{context_text}"
-                        )
+                        ctx_prompt = cfg.get("context_system_prompt", CONTEXT_SYSTEM_PROMPT)
+                        # Question first so the model knows what it's doing,
+                        # then the text to operate on — works with weak local models.
+                        messages = [{
+                            "role": "user",
+                            "content": f"{question}\n\n{context_text}",
+                        }]
                         result = self.enhancer.chat(
                             messages, model, ctx_prompt,
                             provider, api_url, api_key)
@@ -195,6 +194,9 @@ class HotkeyManager:
                         print(f"[hotkeys] context answer: {result!r}", flush=True)
                     except Exception as e:
                         print(f"[hotkeys] context enhance failed: {e}", flush=True)
+
+            if not result:
+                result = "(No response — check AI connection in settings)"
 
             self.state.add_history(f"[context] {question}")
 

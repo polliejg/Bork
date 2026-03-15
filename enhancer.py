@@ -103,8 +103,9 @@ DEFAULT_PRESET = "Coding AI"
 
 
 CONTEXT_SYSTEM_PROMPT = (
-    "You are a helpful assistant. Answer the user's question about the highlighted text. "
-    "Reply with only the answer — no preamble, no sign-off."
+    "You are a helpful assistant. The user will ask a question followed by some text. "
+    "Answer their question about that text. Reply with only the answer — "
+    "no preamble, no repetition of the question or text, no sign-off."
 )
 
 
