@@ -1,0 +1,48 @@
+# ── Claude Code internal files ────────────────────────────────────────────────
+.claude/
+
+# ── User data (may contain API keys or sensitive voice transcriptions) ────────
+config.yaml
+history.json
+voice_tool.log
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environment ───────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── PyInstaller ───────────────────────────────────────────────────────────────
+*.spec.bak
+dist/
+build/
+
+# ── IDE / editor ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.user
+*.swp
+*.swo
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Whisper model cache ───────────────────────────────────────────────────────
+# Models are downloaded automatically to ~/.cache/huggingface on first run.
+# Do NOT commit model weights — they are large binary files.
+*.bin
+*.pt
+models/

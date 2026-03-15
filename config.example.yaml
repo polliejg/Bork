@@ -1,0 +1,49 @@
+# Bork — example configuration
+# Copy this file to config.yaml and fill in your API keys.
+# config.yaml is gitignored and will never be committed.
+
+transcription:
+  model: base        # tiny | base | small | medium | large-v2 | large-v3
+  language: en
+  device: cpu        # cpu | cuda (requires CUDA drivers)
+
+hotkeys:
+  record_key: right ctrl
+  enhance_key: right alt
+
+output:
+  mode: type         # type (auto-paste) | clipboard (copy only)
+
+ai_enhancement:
+  provider: ollama   # ollama | openai | anthropic | groq | custom
+  model: ""          # leave blank to auto-select first available model
+  preset: Coding AI  # Coding AI | Concise | Formal | Custom
+
+  system_prompt: >
+    You are a prompt rewriting assistant. The user has dictated text they
+    want to send to a coding AI. Rewrite it as a clear, well-structured
+    prompt. Do NOT answer the question. Do NOT address the user.
+    ONLY output the rewritten prompt, nothing else.
+
+  context_system_prompt: >
+    You are a helpful assistant. The user has highlighted some text and
+    recorded a voice question about it. Answer their question directly and
+    concisely based on the highlighted text. Output only the answer —
+    no preamble, no sign-off.
+
+  providers:
+    ollama:
+      api_url: http://localhost:11434/v1
+      api_key: ""          # Ollama does not require a key
+    openai:
+      api_url: https://api.openai.com/v1
+      api_key: ""          # sk-...
+    anthropic:
+      api_url: https://api.anthropic.com
+      api_key: ""          # sk-ant-...
+    groq:
+      api_url: https://api.groq.com/openai/v1
+      api_key: ""          # gsk_...
+    custom:
+      api_url: ""          # Any OpenAI-compatible endpoint
+      api_key: ""

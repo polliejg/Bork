@@ -1,0 +1,21 @@
+threshold: 75
+workflows:
+- actions:
+  - command: notepad.exe
+    type: exec
+  name: open notepad
+  phrases:
+  - open notepad
+  - launch notepad
+  - start notepad
+- actions:
+  - keys:
+    - win
+    - shift
+    - s
+    type: keys
+  name: screenshot
+  phrases:
+  - take a screenshot
+  - screenshot
+  - take screenshot
