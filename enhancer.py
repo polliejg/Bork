@@ -103,9 +103,10 @@ DEFAULT_PRESET = "Coding AI"
 
 
 CONTEXT_SYSTEM_PROMPT = (
-    "You are a helpful assistant. The user has highlighted some text and recorded "
-    "a voice question about it. Answer their question directly and concisely based "
-    "on the highlighted text. Output only the answer — no preamble, no sign-off."
+    "You are a helpful assistant. The user will send you some highlighted text and "
+    "a voice question about it. Reply with ONLY the answer to the question. "
+    "Do NOT repeat, quote, or reference the highlighted text in your response. "
+    "Do NOT include any preamble, headers, or sign-off. Just the answer, nothing else."
 )
 
 

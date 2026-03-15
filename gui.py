@@ -971,6 +971,41 @@ class ContextPopup(QWidget):
         bubble.setStyleSheet(style)
         ml.addWidget(bubble)
 
+        # Copy / Insert buttons on assistant messages
+        if role == "assistant":
+            btn_row = QHBoxLayout()
+            btn_row.setContentsMargins(0, 4, 0, 0)
+            btn_row.setSpacing(6)
+            btn_row.addStretch()
+
+            copy_btn = QPushButton("Copy")
+            copy_btn.setFixedHeight(24)
+            copy_btn.setStyleSheet(
+                f"QPushButton {{ font-size:11px; padding:0 10px; border-radius:5px;"
+                f" color:{C['text2']}; background:transparent;"
+                f" border:1px solid rgba(255,255,255,0.10); }}"
+                f"QPushButton:hover {{ color:{C['text']}; border-color:rgba(0,122,255,0.55);"
+                f" background:rgba(0,122,255,0.08); }}")
+            copy_btn.clicked.connect(lambda: pyperclip.copy(text))
+
+            insert_btn = QPushButton("Insert")
+            insert_btn.setFixedHeight(24)
+            insert_btn.setStyleSheet(
+                f"QPushButton {{ font-size:11px; padding:0 10px; border-radius:5px;"
+                f" border:1px solid {C['brand']}; color:{C['brand']}; background:transparent; }}"
+                f"QPushButton:hover {{ background:{C['brand_bg']}; }}")
+
+            def _insert(t=text):
+                pyperclip.copy(t)
+                self.close()
+                QTimer.singleShot(150, lambda: __import__("pyautogui").hotkey("ctrl", "v"))
+
+            insert_btn.clicked.connect(_insert)
+
+            btn_row.addWidget(copy_btn)
+            btn_row.addWidget(insert_btn)
+            ml.addLayout(btn_row)
+
         self._chat_layout.insertWidget(self._chat_layout.count() - 1, msg)
         QTimer.singleShot(50, self._scroll_to_bottom)
 
