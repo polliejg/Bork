@@ -17,10 +17,18 @@ extra_datas = []
 if os.path.isdir("workflows"):
     extra_datas.append(("workflows", "workflows"))
 
+import glob as _glob
+
+# Explicitly pull ctranslate2 DLLs to the top-level _internal dir so Windows
+# can find them without needing AddDllDirectory on older Python builds.
+_ct2_site = os.path.join(os.path.dirname(os.path.abspath("bork.spec")),
+                         ".venv", "Lib", "site-packages", "ctranslate2")
+_ct2_dlls = [(p, ".") for p in _glob.glob(os.path.join(_ct2_site, "*.dll"))]
+
 a = Analysis(
     ["main.py"],
     pathex=[],
-    binaries=ct2_b + fw_b + hf_b + tok_b,
+    binaries=ct2_b + fw_b + hf_b + tok_b + _ct2_dlls,
     datas=ct2_d + fw_d + hf_d + tok_d + extra_datas,
     hiddenimports=(
         ct2_h + fw_h + hf_h + tok_h + [
@@ -45,7 +53,7 @@ a = Analysis(
     ),
     hookspath=[],
     hooksconfig={},
-    runtime_hooks=[],
+    runtime_hooks=["hooks/rthook_ctranslate2.py"],
     excludes=["tkinter", "customtkinter", "pystray", "ollama", "pynput",
               "matplotlib", "scipy", "pandas"],
     noarchive=False,
