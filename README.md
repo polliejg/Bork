@@ -74,7 +74,7 @@ pyinstaller bork.spec
 # output: dist/bork/bork.exe
 ```
 
-Or download a pre-built release from the [Releases](https://github.com/polliejg/Bork/releases) page.
+Or download the pre-built Windows `.exe` from the [latest release](https://github.com/polliejg/Bork/releases/tag/v0.2). Unzip and run `bork.exe` — no Python required.
 
 ---
 
