@@ -41,7 +41,7 @@ A lightweight Windows voice-to-text tool with AI enhancement. Hold a hotkey, spe
 ### Run from source
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/bork.git
+git clone https://github.com/polliejg/Bork.git
 cd bork
 
 python -m venv .venv
@@ -59,7 +59,7 @@ On first run without a `config.yaml`, Bork creates one automatically with defaul
 
 ### Run the pre-built .exe
 
-Download the latest release from the [Releases](../../releases) page, unzip, and run `bork.exe`. No Python required.
+Download the latest release from the [Releases](https://github.com/polliejg/Bork/releases) page, unzip, and run `bork.exe`. No Python required.
 
 > **Note:** Windows Defender may flag the `.exe` as suspicious (false positive common with PyInstaller apps). You can build from source to avoid this — see below.
 
