@@ -119,7 +119,14 @@ def main():
         "prompt. Do NOT answer the question. Do NOT address the user. "
         "ONLY output the rewritten prompt, nothing else."
     ))
-    raw_ai.setdefault("context_system_prompt", _CTX_PROMPT)
+    # Force-update context_system_prompt if it still contains the old wording
+    _old_ctx = "Answer their question directly and concisely based on the highlighted text."
+    if _old_ctx in raw_ai.get("context_system_prompt", ""):
+        raw_ai["context_system_prompt"] = _CTX_PROMPT
+        save_config(config)
+        print("[main] updated context_system_prompt to current default", flush=True)
+    else:
+        raw_ai.setdefault("context_system_prompt", _CTX_PROMPT)
     providers_block = raw_ai.setdefault("providers", {})
     for pid, pdef in _PROV.items():
         providers_block.setdefault(pid, {"api_url": pdef.default_url, "api_key": ""})

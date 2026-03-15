@@ -168,7 +168,7 @@ class HotkeyManager:
         # ── Context mode: highlighted text + voice question → AI answer ───────
         if context_text:
             cfg = self.enhance_cfg
-            user_msg = f"Highlighted text:\n{context_text}\n\nQuestion: {question}"
+            user_msg = f"<context>{context_text}</context>\n<question>{question}</question>"
             messages = [{"role": "user", "content": user_msg}]
             result   = question   # fallback
 
