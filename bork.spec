@@ -11,6 +11,7 @@ ct2_d, ct2_b, ct2_h  = collect_all("ctranslate2")
 fw_d,  fw_b,  fw_h   = collect_all("faster_whisper")
 hf_d,  hf_b,  hf_h   = collect_all("huggingface_hub")
 tok_d, tok_b, tok_h  = collect_all("tokenizers")
+av_d,  av_b,  av_h   = collect_all("av")
 
 # Workflow definitions (created lazily, include dir if it exists)
 extra_datas = []
@@ -28,10 +29,10 @@ _ct2_dlls = [(p, ".") for p in _glob.glob(os.path.join(_ct2_site, "*.dll"))]
 a = Analysis(
     ["main.py"],
     pathex=[],
-    binaries=ct2_b + fw_b + hf_b + tok_b + _ct2_dlls,
-    datas=ct2_d + fw_d + hf_d + tok_d + extra_datas,
+    binaries=ct2_b + fw_b + hf_b + tok_b + av_b + _ct2_dlls,
+    datas=ct2_d + fw_d + hf_d + tok_d + av_d + extra_datas,
     hiddenimports=(
-        ct2_h + fw_h + hf_h + tok_h + [
+        ct2_h + fw_h + hf_h + tok_h + av_h + [
             "PyQt6",
             "PyQt6.QtCore",
             "PyQt6.QtGui",
