@@ -120,8 +120,11 @@ def main():
         "ONLY output the rewritten prompt, nothing else."
     ))
     # Force-update context_system_prompt if it still contains the old wording
-    _old_ctx = "Answer their question directly and concisely based on the highlighted text."
-    if _old_ctx in raw_ai.get("context_system_prompt", ""):
+    _old_ctx_phrases = [
+        "Answer their question directly and concisely based on the highlighted text.",
+        "Do NOT repeat, quote, or reference the highlighted text in your response.",
+    ]
+    if any(p in raw_ai.get("context_system_prompt", "") for p in _old_ctx_phrases):
         raw_ai["context_system_prompt"] = _CTX_PROMPT
         save_config(config)
         print("[main] updated context_system_prompt to current default", flush=True)
