@@ -940,7 +940,6 @@ class ContextPopup(QWidget):
 
         outer.addWidget(self._container)
 
-        self._add_message("user", question)
         self._add_message("assistant", answer)
 
     def _add_message(self, role: str, text: str):
