@@ -168,8 +168,10 @@ class HotkeyManager:
         # ── Context mode: highlighted text + voice question → AI answer ───────
         if context_text:
             cfg = self.enhance_cfg
-            user_msg = f"{context_text}\n\n---\n{question}"
-            messages = [{"role": "user", "content": user_msg}]
+            # Only the question goes as the user message.
+            # The highlighted text is embedded in the system prompt so the
+            # model treats it as background context, not something to echo back.
+            messages = [{"role": "user", "content": question}]
             result   = question   # fallback
 
             if not self.enhancer.connected:
@@ -181,7 +183,11 @@ class HotkeyManager:
                 if model:
                     self.state.set_status(Status.ENHANCING)
                     try:
-                        ctx_prompt = cfg.get("context_system_prompt", CONTEXT_SYSTEM_PROMPT)
+                        base_prompt = cfg.get("context_system_prompt", CONTEXT_SYSTEM_PROMPT)
+                        ctx_prompt = (
+                            f"{base_prompt}\n\n"
+                            f"The user has highlighted this text:\n\n{context_text}"
+                        )
                         result = self.enhancer.chat(
                             messages, model, ctx_prompt,
                             provider, api_url, api_key)

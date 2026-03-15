@@ -103,11 +103,8 @@ DEFAULT_PRESET = "Coding AI"
 
 
 CONTEXT_SYSTEM_PROMPT = (
-    "You are a helpful assistant. The user will send you a block of text followed "
-    "by '---' and then a question about that text. "
-    "Reply with ONLY the answer to the question. "
-    "Do NOT repeat or quote the text. Do NOT include preamble or sign-off. "
-    "Just answer the question directly."
+    "You are a helpful assistant. Answer the user's question about the highlighted text. "
+    "Reply with only the answer — no preamble, no sign-off."
 )
 
 
